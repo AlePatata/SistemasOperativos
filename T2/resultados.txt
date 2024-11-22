@@ -1,0 +1,150 @@
+Sistema operativo utilizado
+Linux debian12 6.1.0-18-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.1.76-1 (2024-02-01) x86_64 GNU/Linux
+==== run-san ====
+gcc -g -DSAN=1 -fsanitize=address -fsanitize=undefined -Wall -Werror -std=c18  test-compartir.c compartir.c -lm -lpthread -o compartir.bin-san
+./compartir.bin-san
+Primer test: se invoca 1 acceder despues de compartir
+Primer test exitoso
+2do. test: se invoca 1 acceder antes que compartir
+2do. test exitoso
+El test del enunciado
+    0: lanzando T4
+    0: T4 solicita acceder
+ 1000: lanzando T3
+ 1000: T3 solicita acceder
+ 3001: lanzando T1
+ 3002: T1 solicita compartir p
+ 3002: T4 accede a p
+ 3002: T3 accede a p
+ 4003: lanzando T2
+ 4003: T2 solicita acceder
+ 4003: T2 accede a p
+ 5002: T4 devuelve
+ 6003: T2 devuelve
+ 7002: T3 devuelve
+ 7002: T1 termina de compartir p
+ 9003: T1 solicita compartir q
+11005: T2 solicita acceder
+11005: T2 accede a q
+12005: T2 devuelve
+12005: T1 termina de compartir q
+Test del enunciado exitoso
+
+El test de esfuerzo: se crea 1 thread que comparte 'y'.
+200 threads que acceden 30000 veces.  No debe ocurrir un deadlock.
+Tomo ~ 4 segundos en mi ryzen 5 3550H
+Test de esfuerzo exitoso en 1 segundos
+Se hicieron 8779 llamadas a compartir
+
+Felicitaciones: su tarea funciona correctamente
+==== run-thr ====
+gcc -g -DSAN=1 -fsanitize=thread -Wall -Werror -std=c18  test-compartir.c compartir.c -lm -lpthread -o compartir.bin-thr
+./compartir.bin-thr
+Primer test: se invoca 1 acceder despues de compartir
+Primer test exitoso
+2do. test: se invoca 1 acceder antes que compartir
+2do. test exitoso
+El test del enunciado
+    0: lanzando T4
+    0: T4 solicita acceder
+ 1001: lanzando T3
+ 1002: T3 solicita acceder
+ 3003: lanzando T1
+ 3004: T1 solicita compartir p
+ 3004: T4 accede a p
+ 3004: T3 accede a p
+ 4004: lanzando T2
+ 4006: T2 solicita acceder
+ 4006: T2 accede a p
+ 5004: T4 devuelve
+ 6006: T2 devuelve
+ 7005: T3 devuelve
+ 7005: T1 termina de compartir p
+ 9006: T1 solicita compartir q
+11006: T2 solicita acceder
+11006: T2 accede a q
+12007: T2 devuelve
+12007: T1 termina de compartir q
+Test del enunciado exitoso
+
+El test de esfuerzo: se crea 1 thread que comparte 'y'.
+200 threads que acceden 30000 veces.  No debe ocurrir un deadlock.
+Tomo ~ 4 segundos en mi ryzen 5 3550H
+Test de esfuerzo exitoso en 9 segundos
+Se hicieron 20565 llamadas a compartir
+
+Felicitaciones: su tarea funciona correctamente
+==== run-g ====
+gcc -g -Wall -Werror -std=c18  test-compartir.c compartir.c -lm -lpthread -o compartir.bin-g
+./compartir.bin-g
+Primer test: se invoca 1 acceder despues de compartir
+Primer test exitoso
+2do. test: se invoca 1 acceder antes que compartir
+2do. test exitoso
+El test del enunciado
+    0: lanzando T4
+    0: T4 solicita acceder
+ 1000: lanzando T3
+ 1001: T3 solicita acceder
+ 3004: lanzando T1
+ 3004: T1 solicita compartir p
+ 3004: T4 accede a p
+ 3004: T3 accede a p
+ 4010: lanzando T2
+ 4011: T2 solicita acceder
+ 4011: T2 accede a p
+ 5005: T4 devuelve
+ 6011: T2 devuelve
+ 7005: T3 devuelve
+ 7005: T1 termina de compartir p
+ 9005: T1 solicita compartir q
+11011: T2 solicita acceder
+11011: T2 accede a q
+12020: T2 devuelve
+12020: T1 termina de compartir q
+Test del enunciado exitoso
+
+El test de esfuerzo: se crea 1 thread que comparte 'y'.
+200 threads que acceden 30000 veces.  No debe ocurrir un deadlock.
+Tomo ~ 4 segundos en mi ryzen 5 3550H
+Test de esfuerzo exitoso en 1 segundos
+Se hicieron 5807 llamadas a compartir
+
+Felicitaciones: su tarea funciona correctamente
+==== run ====
+gcc -O -DOPT=1 -Wall -Werror -std=c18  test-compartir.c compartir.c -lm -lpthread -o compartir.bin
+./compartir.bin
+Primer test: se invoca 1 acceder despues de compartir
+Primer test exitoso
+2do. test: se invoca 1 acceder antes que compartir
+2do. test exitoso
+El test del enunciado
+    0: lanzando T4
+    0: T4 solicita acceder
+ 1000: lanzando T3
+ 1001: T3 solicita acceder
+ 3001: lanzando T1
+ 3001: T1 solicita compartir p
+ 3001: T4 accede a p
+ 3001: T3 accede a p
+ 4001: lanzando T2
+ 4002: T2 solicita acceder
+ 4002: T2 accede a p
+ 5002: T4 devuelve
+ 6003: T2 devuelve
+ 7002: T3 devuelve
+ 7002: T1 termina de compartir p
+ 9008: T1 solicita compartir q
+11003: T2 solicita acceder
+11003: T2 accede a q
+12004: T2 devuelve
+12004: T1 termina de compartir q
+Test del enunciado exitoso
+
+El test de esfuerzo: se crea 1 thread que comparte 'y'.
+200 threads que acceden 30000 veces.  No debe ocurrir un deadlock.
+Tomo ~ 4 segundos en mi ryzen 5 3550H
+Test de esfuerzo exitoso en 2 segundos
+Se hicieron 34968 llamadas a compartir
+
+Felicitaciones: su tarea funciona correctamente
