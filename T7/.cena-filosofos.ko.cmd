@@ -1,0 +1,1 @@
+cmd_/home/pss/Escritorio/T7/cena-filosofos.ko := ld -r -m elf_x86_64 -z noexecstack --no-warn-rwx-segments --build-id=sha1  -T arch/x86/module.lds -o /home/pss/Escritorio/T7/cena-filosofos.ko /home/pss/Escritorio/T7/cena-filosofos.o /home/pss/Escritorio/T7/cena-filosofos.mod.o;  true
